@@ -1,0 +1,57 @@
+header {
+    background-color: var(--main-bck-col, black);
+    color: var(--main-text-col, white);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+nav {
+    display: flex;
+    gap: 4rem;
+    font-size: 1.15rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--main-text-col, white);
+}
+
+.cart-div {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.cart-icon {
+    position: absolute;
+    bottom: -20%;
+}
+
+.cart-circle {
+    position: absolute;
+    left: 60%;
+    bottom: 57%;
+}
+
+.cart-num, .cart-num-big {
+    font-size: 0.9rem;
+    color: black;
+    font-weight: 400;
+    position: absolute;
+    left: 84%;
+    bottom: 63%;
+}
+
+.cart-num-big {
+    font-size: 0.7rem;
+    left: 80%;
+    bottom: 65%;
+}
