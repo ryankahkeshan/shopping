@@ -5,6 +5,9 @@ import Collections from "./Collections/Collections";
 import Tops from "./Tops/Tops";
 import Pants from "./Pants/Pants";
 import Shoes from "./Shoes/Shoes";
+import AboutUs from "./AboutUs/AboutUs";
+import ContactUs from "./ContactUs/ContactUs";
+import OurStory from "./OurStory/OurStory";
 
 const Router = () => {
     const router = createBrowserRouter([
@@ -31,6 +34,18 @@ const Router = () => {
             {
               path: "shoes",
               element: <Shoes />
+            },
+            {
+              path: "about-us",
+              element: <AboutUs />
+            },
+            {
+              path: "contact-us",
+              element: <ContactUs />
+            },
+            {
+              path: "our-story",
+              element: <OurStory />
             }
           ]
         },

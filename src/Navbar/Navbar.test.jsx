@@ -10,16 +10,13 @@ describe("header", () => {
     });
 
     const getLinks = name => {
-        return screen.getByRole("link", { name });
+        return screen.getAllByRole("link", { name });
     }
 
     it("renders logo", () => {
         // First part of logo
-        const myLogo = screen.getByText("My");
-        expect(myLogo).toBeInTheDocument();
-        // Second part of logo
-        const shopLogo = screen.getByText("SHOP");
-        expect(shopLogo).toBeInTheDocument();
+        const logo = screen.getByTestId('logo');
+        expect(logo.textContent).toMatch("MySHOP");
     });
 
     describe("navigation links", () => {
@@ -30,12 +27,12 @@ describe("header", () => {
             const topsLink = getLinks("Tops");
             const pantsLink = getLinks("Pants");
             const shoesLink = getLinks("Shoes");
-
-            expect(homeLink).toBeInTheDocument();
-            expect(collectionsLink).toBeInTheDocument();
-            expect(topsLink).toBeInTheDocument();
-            expect(pantsLink).toBeInTheDocument();
-            expect(shoesLink).toBeInTheDocument();
+            
+            expect(homeLink[0]).toHaveClass('nav-link');
+            expect(collectionsLink[0]).toHaveClass('nav-link');
+            expect(topsLink[0]).toHaveClass('nav-link');
+            expect(pantsLink[0]).toHaveClass('nav-link');
+            expect(shoesLink[0]).toHaveClass('nav-link');
         })
         
         it("links work properly", async () => {
@@ -47,19 +44,19 @@ describe("header", () => {
 
             const user = userEvent.setup();
 
-            await user.click(homeLink);
+            await user.click(homeLink[0]);
             expect(window.location.pathname).toBe("/");
 
-            await user.click(collectionsLink);
+            await user.click(collectionsLink[0]);
             expect(window.location.pathname).toBe("/collections");
 
-            await user.click(topsLink);
+            await user.click(topsLink[0]);
             expect(window.location.pathname).toBe("/tops");
 
-            await user.click(pantsLink);
+            await user.click(pantsLink[0]);
             expect(window.location.pathname).toBe("/pants");
 
-            await user.click(shoesLink);
+            await user.click(shoesLink[0]);
             expect(window.location.pathname).toBe("/shoes");
         })
     })

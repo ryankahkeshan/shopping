@@ -10,7 +10,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <div className='logo'>My<em>SHOP</em></div>
+            <div className='logo' data-testid='logo'>My<em>SHOP</em></div>
             <nav>
                 <NavLink to='/' className='nav-link'>Home</NavLink>
                 <NavLink to='collections' className='nav-link'>Collections</NavLink>
