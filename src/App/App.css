@@ -1,0 +1,22 @@
+.slideshow {
+    display: flex;
+    align-items: center;
+}
+
+.slides {
+    height: 600px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-position: 0%; /* Start the background image at the left side */
+    animation: slideAnimation 5s linear infinite; /* Adjust the duration as needed */
+}
+  
+  @keyframes slideAnimation {
+    0% {
+      background-position: 0%; /* Start from the left */
+    }`
+    100% {
+      background-position: 100%; /* Move to the right */
+    }
+  }
