@@ -40,6 +40,7 @@ const Footer = () => {
             <section className='footer-columns'>
                 <section className='footer-section-links'>
                     <h3>Shop Now</h3>
+                    <Link to='/all-products' className='footer-links'>All Products</Link>
                     <Link to='/collections' className='footer-links'>Collections</Link>
                     <Link to='/mens' className='footer-links'>Mens</Link>
                     <Link to='/womens' className='footer-links'>Womens</Link>

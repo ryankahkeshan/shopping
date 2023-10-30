@@ -63,7 +63,7 @@ footer {
     width: 180px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.462);
     position: absolute;
-    top: 65%;
+    top: 58%;
 }
 
 .newsletter-error::placeholder {
@@ -72,7 +72,7 @@ footer {
 
 .send-email {
     position: absolute;
-    top: 73.5%;
+    top: 66%;
     right: 13%;
     border: none;
     outline: none;

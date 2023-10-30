@@ -13,6 +13,7 @@ const Router = () => {
   const [mens, setMens] = useState([])
   const [womens, setWomens] = useState([])
   const [jewelry, setJewelry] = useState([])
+  const [allProducts, setAllProducts] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -28,17 +29,20 @@ const Router = () => {
         const menArr = []
         const womenArr = []
         const jewelryArr = []
+        const all = []
         data.forEach(element => {
           const collection = element.category
-          collection === 'men\'s clothing' ? menArr.push(element)
-            : collection === 'women\'s clothing' ? womenArr.push(element)
-            : collection === 'jewelery' ? jewelryArr.push(element)
+          collection === 'men\'s clothing' ? menArr.push(element) && all.push(element)
+            : collection === 'women\'s clothing' ? womenArr.push(element) && all.push(element)
+            : collection === 'jewelery' ? jewelryArr.push(element) && all.push(element)
             : null
         })
         menArr.push(menArr.shift())
+        console.log(all)
         setMens(menArr)
         setWomens(womenArr)
         setJewelry(jewelryArr)
+        setAllProducts(all)
       })
       .catch(err => setError(err))
       .finally(() => setLoading(false))
@@ -83,7 +87,7 @@ const Router = () => {
         },
         {
           path: "all-products",
-          element: <AllProducts />
+          element: <ProductPage data={allProducts} title={'All Products'} />
         }
       ]
     }
