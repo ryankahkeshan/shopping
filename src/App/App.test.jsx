@@ -1,11 +1,44 @@
-import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect, beforeEach } from 'vitest';
+import Router from '../Router';
+import { userEvent } from '@testing-library/user-event';
 
-describe('something truthy and falsy', () => {
-  it('true to be true', () => {
-    expect(true).toBe(true);
-  });
+describe("welcome section", () => {
+  
+  beforeEach(() => {
+    render(<Router />)
+  })
 
-  it('false to be false', () => {
-    expect(false).toBe(false);
-  });
-});
+  it('renders title', () => {
+    const title = screen.getByRole('heading', {name: 'Welcome to My SHOP'})
+    expect(title).toBeInTheDocument()
+  })
+
+  it('renders the best', () => {
+    const heading = screen.getByRole('heading', {name: 'The best store out there'})
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('renders buttons', () => {
+    const shopNow = screen.getAllByRole('button', {name: 'SHOP NOW'})
+    expect(shopNow[0]).toHaveClass('shop-now-btn')
+
+    const seeCol = screen.getByRole('button', {name: 'SEE COLLECTIONS'})
+    expect(seeCol).toBeInTheDocument()
+  })
+
+  it('button links work', async () => {
+    const shopNow = screen.getAllByRole('button', {name: 'SHOP NOW'})[0]
+    const user = userEvent.setup()
+
+    await user.click(shopNow)
+    expect(window.location.pathname).toBe('/all-products')
+
+    const homeLink = screen.getAllByRole('link', {name: 'Home'})[0]
+    await user.click(homeLink)
+
+    const seeCol = screen.getByRole('button', {name: 'SEE COLLECTIONS'})
+    await user.click(seeCol)
+    expect(window.location.pathname).toBe('/collections')
+  })
+})

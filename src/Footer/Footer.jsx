@@ -41,9 +41,9 @@ const Footer = () => {
                 <section className='footer-section-links'>
                     <h3>Shop Now</h3>
                     <Link to='/collections' className='footer-links'>Collections</Link>
-                    <Link to='/tops' className='footer-links'>Tops</Link>
-                    <Link to='/pants' className='footer-links'>Pants</Link>
-                    <Link to='/shoes' className='footer-links'>Shoes</Link>
+                    <Link to='/mens' className='footer-links'>Mens</Link>
+                    <Link to='/womens' className='footer-links'>Womens</Link>
+                    <Link to='/jewelry' className='footer-links'>Jewelry</Link>
                 </section>
                 <section className='footer-section-links'>
                     <h3>Useful Links</h3>

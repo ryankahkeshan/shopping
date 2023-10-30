@@ -1,23 +1,13 @@
 import './Slideshow.css'
-import pic1 from './slides/one.png'
-import pic2 from './slides/two.jpg'
-import pic3 from './slides/three.png'
-import pic4 from './slides/four.jpg'
-import pic5 from './slides/five.jpg'
 import { useEffect, useState } from 'react'
 import Icon from '@mdi/react';
 import { mdiArrowLeftBold } from '@mdi/js';
 import { mdiArrowRightBold } from '@mdi/js';
+import PropTypes, { objectOf, string } from 'prop-types';
 
-const SLIDES = [
-    {url: pic1, alt: 'Slide 1: 3 friends having fun'},
-    {url: pic2, alt: 'Slide 2: 2 friends smiling at the camera'},
-    {url: pic3, alt: 'Slide 3: 4 friends having fun at a party'},
-    {url: pic4, alt: 'Slide 4: 5 friends smiling while camping at night'},
-    {url: pic5, alt: 'Slide 5: 4 girls smiling while sitting down together'}
-]
+const Slideshow = ({ timer = 5000, slides }) => {
 
-const Slideshow = ({ timer = 5000 }) => {
+    const SLIDES = slides
 
     const [imageIdx, setImageIdx] = useState(0)
 
@@ -71,6 +61,11 @@ const Slideshow = ({ timer = 5000 }) => {
             <div id='skip-slideshow'> </div>
         </section>
     )
+}
+
+Slideshow.propTypes = {
+    timer: PropTypes.number,
+    slides: PropTypes.arrayOf(objectOf(string))
 }
 
 export default Slideshow

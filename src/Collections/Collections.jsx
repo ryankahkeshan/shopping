@@ -1,4 +1,3 @@
-import Slideshow from "../Slideshow/Slideshow";
 import "./Collections.css"
 
 const Collections = () => {

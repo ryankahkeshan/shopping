@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css'
 import Icon from '@mdi/react';
 import { mdiCartOutline } from '@mdi/js';
@@ -10,13 +10,15 @@ const Navbar = () => {
 
     return (
         <header>
-            <div className='logo' data-testid='logo'>My<em>SHOP</em></div>
+            <Link to='/' className='logo-link'>
+                <h1 className='logo' data-testid='logo'>My<em>SHOP</em></h1>
+            </Link>
             <nav>
                 <NavLink to='/' className='nav-link'>Home</NavLink>
                 <NavLink to='collections' className='nav-link'>Collections</NavLink>
-                <NavLink to='tops' className='nav-link'>Tops</NavLink>
-                <NavLink to='pants' className='nav-link'>Pants</NavLink>
-                <NavLink to='shoes' className='nav-link'>Shoes</NavLink>
+                <NavLink to='mens' className='nav-link'>Mens</NavLink>
+                <NavLink to='womens' className='nav-link'>Womens</NavLink>
+                <NavLink to='jewelry' className='nav-link'>Jewelry</NavLink>
             </nav>
             <div className='cart-div'>
                 <Icon path={mdiCartOutline} size={1.3} className='cart-icon' data-testid="cart-icon" />

@@ -17,36 +17,36 @@ describe("footer", () => {
         expect(shopNow).toBeInTheDocument();
         // Get links
         const collectionsLink = getLinks("Collections");
-        const topsLink = getLinks("Tops");
-        const pantsLink = getLinks("Pants");
-        const shoesLink = getLinks("Shoes");
+        const mensLink = getLinks("Mens");
+        const womensLink = getLinks("Womens");
+        const jewelryLink = getLinks("Jewelry");
         
         expect(collectionsLink[1]).toHaveClass('footer-links');
-        expect(topsLink[1]).toHaveClass('footer-links');
-        expect(pantsLink[1]).toHaveClass('footer-links');
-        expect(shoesLink[1]).toHaveClass('footer-links');
+        expect(mensLink[1]).toHaveClass('footer-links');
+        expect(womensLink[1]).toHaveClass('footer-links');
+        expect(jewelryLink[1]).toHaveClass('footer-links');
     })
 
     it("shop now links' work", async () => {
         // Get links
         const collectionsLink = getLinks("Collections");
-        const topsLink = getLinks("Tops");
-        const pantsLink = getLinks("Pants");
-        const shoesLink = getLinks("Shoes");
+        const mensLink = getLinks("Mens");
+        const womensLink = getLinks("Womens");
+        const jewelryLink = getLinks("Jewelry");
 
         const user = userEvent.setup();
 
         await user.click(collectionsLink[1]);
         expect(window.location.pathname).toBe("/collections");
 
-        await user.click(topsLink[1]);
-        expect(window.location.pathname).toBe("/tops");
+        await user.click(mensLink[1]);
+        expect(window.location.pathname).toBe("/mens");
 
-        await user.click(pantsLink[1]);
-        expect(window.location.pathname).toBe("/pants");
+        await user.click(womensLink[1]);
+        expect(window.location.pathname).toBe("/womens");
 
-        await user.click(shoesLink[1]);
-        expect(window.location.pathname).toBe("/shoes");
+        await user.click(jewelryLink[1]);
+        expect(window.location.pathname).toBe("/jewelry");
     })
 
     it("renders useful links", () => {

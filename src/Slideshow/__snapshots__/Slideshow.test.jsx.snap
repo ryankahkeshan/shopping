@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`automatic scroll > custom timer 1`] = `<div />`;
+
+exports[`automatic scroll > custom timer 2`] = `<div />`;
+
+exports[`automatic scroll > custom timer 3`] = `<div />`;

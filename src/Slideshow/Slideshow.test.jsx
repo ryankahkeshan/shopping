@@ -4,26 +4,44 @@ import { userEvent } from "@testing-library/user-event"
 import Router from "../Router"
 import Slideshow from "./Slideshow"
 import { act } from "react-dom/test-utils"
+import { SLIDES } from "../App/App"
 
-function checkNotHidden(idx) {
-    const images = screen.getAllByAltText(/Slide \d+/)
-    images.forEach((image, index) => {
-        if (index === idx) {
-        expect(image).toHaveAttribute('aria-hidden', 'false')
-        } else {
-        expect(image).toHaveAttribute('aria-hidden', 'true')
-        }
-    })
-}
+// export const SLIDES = [
+//     {url: pic1, alt: 'Slide 1: 3 friends having fun'},
+//     {url: pic2, alt: 'Slide 2: 2 friends smiling at the camera'},
+//     {url: pic3, alt: 'Slide 3: 4 friends having fun at a party'},
+//     {url: pic4, alt: 'Slide 4: 5 friends smiling while camping at night'},
+//     {url: pic5, alt: 'Slide 5: 4 girls smiling while sitting down together'}
+//   ]
 
 describe("slideshow", () => {
     beforeEach(() => {
         render(<Router />)
     })
 
+    function checkNotHidden(idx) {
+
+        const allSlides = 
+        [
+            screen.getByAltText(SLIDES[0].alt),
+            screen.getByAltText(SLIDES[1].alt),
+            screen.getByAltText(SLIDES[2].alt),
+            screen.getByAltText(SLIDES[3].alt),
+            screen.getByAltText(SLIDES[4].alt)
+        ]
+        
+        allSlides.forEach((image, index) => {
+            if (index === idx) {
+            expect(image).toHaveAttribute('aria-hidden', 'false')
+            } else {
+            expect(image).toHaveAttribute('aria-hidden', 'true')
+            }
+        })
+    }
+
     it("renders first image", () => {
-        const firstImage = screen.getByAltText('Slide 1: 3 friends having fun')
-        const secondImage = screen.getByAltText('Slide 2: 2 friends smiling at the camera')
+        const firstImage = screen.getByAltText(SLIDES[0].alt)
+        const secondImage = screen.getByAltText(SLIDES[1].alt)
         expect(firstImage).toHaveAttribute('aria-hidden', 'false')  
         expect(secondImage).toHaveAttribute('aria-hidden', 'true')             
     })
@@ -91,21 +109,49 @@ describe("slideshow", () => {
     })
 })
 
-describe('automatic scroll', () => {
-    it('custom timer', () => {
-        const timer = 5;
-        act(async () => {
-            render(<Slideshow timer={timer} />)
-            await new Promise((resolve) => setTimeout(resolve, timer))
-            checkNotHidden(1)
-            await new Promise((resolve) => setTimeout(resolve, timer))
-            checkNotHidden(2)
-            await new Promise((resolve) => setTimeout(resolve, timer))
-            checkNotHidden(3)
-            await new Promise((resolve) => setTimeout(resolve, timer))
-            checkNotHidden(4)
-            await new Promise((resolve) => setTimeout(resolve, timer))
-            checkNotHidden(0)
-        })
-    })
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+describe("automatic scroll", () => {
+    it("custom timer", async () => {
+      const timer = 20;
+
+      function checkNotHidden(idx) {
+        const allSlides = [
+          screen.getByAltText(SLIDES[0].alt),
+          screen.getByAltText(SLIDES[1].alt),
+          screen.getByAltText(SLIDES[2].alt),
+          screen.getByAltText(SLIDES[3].alt),
+          screen.getByAltText(SLIDES[4].alt),
+        ];
+        allSlides.forEach((image, index) => {
+          if (index === idx) {
+            expect(image).toHaveAttribute("aria-hidden", "false")
+          } else {
+            expect(image).toHaveAttribute("aria-hidden", "true")
+          }
+        });
+      }
+  
+      await act(async () => {
+        render(<Slideshow timer={timer} slides={SLIDES} />)
+      })
+
+        await act(() => sleep(timer))
+        checkNotHidden(1);
+        await act(() => sleep(timer))
+        checkNotHidden(2);
+        await act(() => sleep(timer))
+        checkNotHidden(3);
+        await act(() => sleep(timer))
+        checkNotHidden(4);
+        await act(() => sleep(timer))
+        checkNotHidden(0);
+    });
 })
+  
+  
+  
+  
+  

@@ -1,22 +1,63 @@
-.slideshow {
+.welcome-front-page {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 4rem 3rem 2rem;
+    gap: 6px;
 }
 
-.slides {
-    height: 600px;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-position: 0%; /* Start the background image at the left side */
-    animation: slideAnimation 5s linear infinite; /* Adjust the duration as needed */
+.welcome-front-page h1 {
+    font-size: 4rem;
 }
-  
-  @keyframes slideAnimation {
-    0% {
-      background-position: 0%; /* Start from the left */
-    }`
-    100% {
-      background-position: 100%; /* Move to the right */
-    }
-  }
+
+.welcome-front-page h3 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.welcome-btns {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.welcome-btns button {
+    outline: none;
+    border-radius: 16px;
+    padding: 0.5rem 1rem;
+    width: 188px;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: scale 0.1s ease-in-out, background-color 0.1s ease-in-out;
+}
+
+.welcome-btns button:hover {
+    scale: 1.05;
+}
+
+.shop-now-btn {
+    color: white;
+    background-color: var(--main-bck-col);
+    border: none;
+}
+
+.shop-now-btn:hover {
+    background-color: var(--main-bck-dark);
+}
+
+.see-collections-btn {
+    border: 2px solid var(--main-bck-col);
+    color: var(--main-bck-col);
+    background-color: white;
+}
+
+.app-card {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
