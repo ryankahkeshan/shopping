@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import Slideshow from '../Slideshow/Slideshow'
 import { Link } from 'react-router-dom'
@@ -23,16 +22,6 @@ export const SLIDES = [
 ]
 
 const App = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(data => {
-              setItems(data);
-            })
-  }, [])
-
 
   return (
     <>
@@ -86,9 +75,6 @@ const App = () => {
           ]
         } />
       </div>
-      {/* {items.map(item => {
-        return <img key={item.id} src={item.image}></img>
-      })} */}
     </>
   )
 };
