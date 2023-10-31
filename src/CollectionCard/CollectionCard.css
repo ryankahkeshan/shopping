@@ -1,0 +1,48 @@
+.collection-card {
+    height: 350px;
+    width: 375px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: 2px solid black;
+    box-shadow: 0 0 6px black;
+    padding: 2rem 1rem 1.25rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    gap: 1rem;
+    text-decoration: none;
+    color: black;
+}
+
+.collection-card-top {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: scale 0.2s ease-in-out;
+}
+
+.collection-card:hover .collection-card-top {
+    scale: 1.05;
+}
+
+.collection-card-top img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.collection-card h3 {
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.collection-card:hover h3 {
+    background-color: var(--main-bck-col, black);
+    color: var(--main-text-col, white);
+}

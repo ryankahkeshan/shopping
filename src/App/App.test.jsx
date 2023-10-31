@@ -1,12 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
-import Router from '../Router';
 import { userEvent } from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 
 describe("welcome section", () => {
   
   beforeEach(() => {
-    render(<Router />)
+    render(
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    )
   })
 
   it('renders title', () => {
@@ -27,17 +32,18 @@ describe("welcome section", () => {
     expect(seeCol).toBeInTheDocument()
   })
 
-  it('button links work', async () => {
+  it('shop now button link works', async () => {
     const shopNow = screen.getAllByRole('button', {name: 'SHOP NOW'})[0]
     const user = userEvent.setup()
 
     await user.click(shopNow)
     expect(window.location.pathname).toBe('/all-products')
+  })
 
-    const homeLink = screen.getAllByRole('link', {name: 'Home'})[0]
-    await user.click(homeLink)
-
+  it('see collections link wokrs', async () => {
     const seeCol = screen.getByRole('button', {name: 'SEE COLLECTIONS'})
+    const user = userEvent.setup()
+
     await user.click(seeCol)
     expect(window.location.pathname).toBe('/collections')
   })

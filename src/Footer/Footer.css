@@ -10,7 +10,7 @@ footer {
 .footer-columns {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .footer-columns h3 {

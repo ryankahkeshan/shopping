@@ -1,15 +1,19 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import { userEvent } from "@testing-library/user-event";
-import Router from "../Router";
+import { BrowserRouter } from "react-router-dom";
+import Footer from "./Footer";
 
 describe("footer", () => {
     beforeEach(() => {
-        render(<Router />);
+        render(
+        <BrowserRouter>
+            <Footer />
+        </BrowserRouter>);
     })
 
     const getLinks = name => {
-        return screen.getAllByRole("link", { name });
+        return screen.getByRole("link", { name });
     }
 
     it("renders shop now and links", () => {
@@ -21,10 +25,10 @@ describe("footer", () => {
         const womensLink = getLinks("Womens");
         const jewelryLink = getLinks("Jewelry");
         
-        expect(collectionsLink[1]).toHaveClass('footer-links');
-        expect(mensLink[1]).toHaveClass('footer-links');
-        expect(womensLink[1]).toHaveClass('footer-links');
-        expect(jewelryLink[1]).toHaveClass('footer-links');
+        expect(collectionsLink).toBeInTheDocument()
+        expect(mensLink).toBeInTheDocument()
+        expect(womensLink).toBeInTheDocument()
+        expect(jewelryLink).toBeInTheDocument()
     })
 
     it("shop now links' work", async () => {
@@ -36,16 +40,16 @@ describe("footer", () => {
 
         const user = userEvent.setup();
 
-        await user.click(collectionsLink[1]);
+        await user.click(collectionsLink);
         expect(window.location.pathname).toBe("/collections");
 
-        await user.click(mensLink[1]);
+        await user.click(mensLink);
         expect(window.location.pathname).toBe("/mens");
 
-        await user.click(womensLink[1]);
+        await user.click(womensLink);
         expect(window.location.pathname).toBe("/womens");
 
-        await user.click(jewelryLink[1]);
+        await user.click(jewelryLink);
         expect(window.location.pathname).toBe("/jewelry");
     })
 

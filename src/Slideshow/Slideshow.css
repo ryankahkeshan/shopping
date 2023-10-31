@@ -42,8 +42,8 @@
     all: unset;
     display: block;
     cursor: pointer;
-    width: 0.8rem;
-    height: 0.8rem;
+    width: 0.7rem;
+    height: 0.7rem;
 }
 
 .div-dot-btn, .div-dot-btn-selected {

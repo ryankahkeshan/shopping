@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import ProductPage from './CollectionPage';
+import CollectionPage from './CollectionPage';
 
-describe('product pages', () => {
+describe('collection pages', () => {
     it('renders properly', () => {
         render(
-        <ProductPage
+        <CollectionPage
             data={[
                 {
                     id: 1,
@@ -25,6 +25,7 @@ describe('product pages', () => {
                 }
             ]}
             title={'Custom Collection Title'}
+            testing={true}
         />)
 
         const colTitle = screen.getByRole('heading', {name: 'Custom Collection Title'})
@@ -36,9 +37,10 @@ describe('product pages', () => {
 
     it('0 renders', () => {
         render(
-            <ProductPage
+            <CollectionPage
                 data={[]}
                 title={'abc'}
+                testing={true}
             />
         )
         const colTitle = screen.getByRole('heading', {name: 'abc'})

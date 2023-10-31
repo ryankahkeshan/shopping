@@ -5,6 +5,7 @@ import Router from "../Router"
 import Slideshow from "./Slideshow"
 import { act } from "react-dom/test-utils"
 import { SLIDES } from "../App/App"
+import { BrowserRouter } from "react-router-dom"
 
 // export const SLIDES = [
 //     {url: pic1, alt: 'Slide 1: 3 friends having fun'},
@@ -16,7 +17,11 @@ import { SLIDES } from "../App/App"
 
 describe("slideshow", () => {
     beforeEach(() => {
-        render(<Router />)
+        render(
+          <BrowserRouter>
+            <Slideshow slides={SLIDES}/>
+          </BrowserRouter>
+        )
     })
 
     function checkNotHidden(idx) {
@@ -115,7 +120,7 @@ function sleep(ms) {
 
 describe("automatic scroll", () => {
     it("custom timer", async () => {
-      const timer = 20;
+      const timer = 50;
 
       function checkNotHidden(idx) {
         const allSlides = [
@@ -135,7 +140,10 @@ describe("automatic scroll", () => {
       }
   
       await act(async () => {
-        render(<Slideshow timer={timer} slides={SLIDES} />)
+        render(
+          <BrowserRouter>
+            <Slideshow timer={timer} slides={SLIDES} />
+          </BrowserRouter>)
       })
 
         await act(() => sleep(timer))

@@ -14,6 +14,7 @@ const Router = () => {
   const [womens, setWomens] = useState([])
   const [jewelry, setJewelry] = useState([])
   const [allProducts, setAllProducts] = useState([])
+  const [collections, setCollections] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -38,15 +39,31 @@ const Router = () => {
             : null
         })
         menArr.push(menArr.shift())
-        console.log(all)
         setMens(menArr)
         setWomens(womenArr)
         setJewelry(jewelryArr)
         setAllProducts(all)
+        setCollections([
+          {name: 'Mens', item: filterCollection(menArr), link: '/mens'},
+          {name: 'Womens', item: filterCollection(womenArr), link:'/womens'},
+          {name: 'Jewelry', item: filterCollection(jewelryArr), link: '/jewelry'}
+        ])
       })
       .catch(err => setError(err))
       .finally(() => setLoading(false))
   }, [URL])
+
+  const filterCollection = collection => {
+    let bestRating = 0
+    let bestIdx = -1
+    for (let i = 0; i < collection.length; i++) {
+      if (collection[i].rating.rate > bestRating) {
+        bestIdx = i
+        bestRating = collection[i].rating.rate
+      }
+    }
+    return collection[bestIdx]
+  }
 
   const router = createBrowserRouter([
     {
@@ -59,7 +76,7 @@ const Router = () => {
         },
         {
           path: "collections",
-          element: <Collections />
+          element: <Collections data={collections} />
         },
         {
           path: "mens",

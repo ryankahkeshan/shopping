@@ -13,7 +13,7 @@ const ProductCard = ({ url, alt = '', title, price, rating  }) => {
         stars.push(<Star key={uuid()} className='star'/>)
     }
     for(let i = roundedRating; i < 5; i++) {
-        stars.push(<Star key={uuid()} className='star' style={{fill:'transparent'}}/>)
+        stars.push(<Star key={uuid()} className='star empty-star'/>)
     }
 
     function findSubstring(text, maxLength = 40) {

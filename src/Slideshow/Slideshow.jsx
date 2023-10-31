@@ -50,7 +50,7 @@ const Slideshow = ({ timer = 5000, slides }) => {
                 <Icon path={mdiArrowRightBold} size={1.5} />
             </button>
             <div style={{ position: 'absolute', bottom: '0.5rem', left: '50%', 
-            translate: '-50%', display: 'flex', gap: '0.7rem', paddingBottom: '6px' }}>
+            translate: '-50%', display: 'flex', gap: '0.8rem', paddingBottom: '7px' }}>
                 {SLIDES.map((slide, index) => {
                     return <button key={index} className='dot-btn'
                          onClick={() => setImageIdx(index)} aria-label={`View Image ${index + 1}`}>
