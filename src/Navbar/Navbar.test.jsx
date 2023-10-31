@@ -82,3 +82,43 @@ describe("header", () => {
         expect(cartNum).toHaveTextContent("0");
     })
 });
+
+describe('navbar-more', () => {
+    beforeEach(() => {
+        render(
+            <BrowserRouter>
+                <Navbar />
+            </BrowserRouter>
+        )
+    })
+    it('renders', async () => {
+        const more = screen.getByRole('link', {name: 'More ▼'})
+        expect(more).toBeInTheDocument()
+        expect(screen.getByText(/about us/i).parentElement).not.toHaveClass('nav-dropdown-content-shown')
+        const story = screen.getByRole('link', {name: 'Our Story'})
+        expect(story).toBeInTheDocument()
+        const contact = screen.getByRole('link', {name: 'Contact Us'})
+        expect(contact).toBeInTheDocument()
+
+        const user = userEvent.setup()
+        await user.hover(more)
+        const about = screen.getByRole('link', {name: 'About Us'})
+        expect(about.parentElement).toHaveClass('nav-dropdown-content-shown')
+    })
+
+    it('links work', async () => {
+        const about = screen.getByRole('link', {name: 'About Us'})
+        const user = userEvent.setup()
+
+        await user.click(about)
+        expect(window.location.pathname).toBe('/about-us')
+
+        const story = screen.getByRole('link', {name: 'Our Story'})
+        await user.click(story)
+        expect(window.location.pathname).toBe('/our-story')
+
+        const contact = screen.getByRole('link', {name: 'Contact Us'})
+        await user.click(contact)
+        expect(window.location.pathname).toBe('/contact-us')
+    })
+})
