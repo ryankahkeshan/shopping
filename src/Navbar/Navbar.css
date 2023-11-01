@@ -104,16 +104,15 @@ nav {
 }
 
 .cart-num, .cart-num-big {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: black;
-    font-weight: 400;
     position: absolute;
-    left: 84%;
-    bottom: 63%;
+    left: 85%;
+    bottom: 68%;
 }
 
 .cart-num-big {
-    font-size: 0.7rem;
-    left: 80%;
-    bottom: 65%;
+    font-size: 0.65rem;
+    left: 79%;
+    bottom: 72%;
 }

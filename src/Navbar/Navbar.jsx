@@ -3,10 +3,25 @@ import './Navbar.css'
 import Icon from '@mdi/react';
 import { mdiCartOutline } from '@mdi/js';
 import { mdiCircle } from '@mdi/js';
+import { useContext, useMemo, useState } from 'react';
+import SideCart from '../SideCart/SideCart';
+import { CartContext } from '../Router';
 
 
 
 const Navbar = () => {
+
+    const { cartItems } = useContext(CartContext) 
+
+    const totalProducts = useMemo(() => {
+        return cartItems.reduce((total, item) => {
+            return total + item.quantity
+        }, 0)
+    }, [cartItems])
+
+    const tooBig = totalProducts > 9 ? true : false
+
+    const [openCart, setOpenCart] = useState(false)
 
     const showDropdown = () => {
         const seperator = document.querySelector('.seperator')
@@ -40,8 +55,9 @@ const Navbar = () => {
                 <NavLink to='mens' className='nav-link'>Mens</NavLink>
                 <NavLink to='womens' className='nav-link'>Womens</NavLink>
                 <NavLink to='jewelry' className='nav-link'>Jewelry</NavLink>
-                <div className="nav-dropdown" onMouseEnter={showDropdown} onMouseLeave={hideDropdown} onClick={clickDropdown}>
-                    <a href="#" className="nav-link" style={{display:'flex', alignItems:'center', gap:'8px'}}>
+                <div className="nav-dropdown" onMouseEnter={showDropdown} onMouseLeave={hideDropdown}>
+                    <a href="#" className="nav-link" onClick={clickDropdown}
+                        style={{display:'flex', alignItems:'center', gap:'8px'}}>
                         More <p style={{fontSize:'0.6rem'}}>▼</p></a>
                     <div className="seperator">
                         <div className="nav-dropdown-content-hidden">
@@ -52,11 +68,14 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-            <div className='cart-div'>
+            <div className='cart-div' onClick={() => setOpenCart(true)}>
                 <Icon path={mdiCartOutline} size={1.3} className='cart-icon' data-testid="cart-icon" />
                 <Icon path={mdiCircle} size={0.85} className='cart-circle' data-testid="cart-circle" />
-                <p className='cart-num' data-testid="cart-num">0</p>
+                <p className={tooBig ? 'cart-num-big' : 'cart-num'} data-testid="cart-num">
+                    {tooBig ? '9+' : totalProducts}
+                </p>
             </div>
+            {openCart && <SideCart closeCart={setOpenCart} />}
         </header> 
     )
 }

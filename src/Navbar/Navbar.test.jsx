@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import Navbar from "./Navbar";
+import CollectionPage from "../CollectionPage/CollectionPage";
 
 describe("header", () => {
 
@@ -120,5 +121,24 @@ describe('navbar-more', () => {
         const contact = screen.getByRole('link', {name: 'Contact Us'})
         await user.click(contact)
         expect(window.location.pathname).toBe('/contact-us')
+    })
+})
+
+describe("navbar", () => {
+    it('shows cart after click', async () => {
+        render(
+            <BrowserRouter>
+                <Navbar/>
+            </BrowserRouter>
+        )
+        const cart = screen.getByTestId('cart-icon')
+        const beforeOpen = screen.queryByText('Your Cart')
+        expect(beforeOpen).toBeNull()
+
+        const user = userEvent.setup()
+        await user.click(cart)
+
+        const afterOpen = screen.getByText('Your Cart')
+        expect(afterOpen).toBeInTheDocument()
     })
 })

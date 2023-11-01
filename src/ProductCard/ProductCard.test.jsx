@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, beforeEach } from 'vitest';
-import Router from '../Router';
+import { describe, it, expect, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import ProductCard from './ProductCard';
 import { BrowserRouter } from 'react-router-dom';
+import { CartContext } from '../Router';
 
 describe('product-card', () => {
-
     it('renders properly', () => {
         render(
             <BrowserRouter>
@@ -87,5 +86,24 @@ describe('product-card', () => {
         for (let i = 0; i < 5; i++) {
             expect(stars.childNodes[i]).toHaveClass('empty-star')
         }
+    })
+
+    it('add to cart works', async () => {
+        const addToCart = vi.fn()
+        render(
+            <CartContext.Provider value={{ addToCart }}>
+                <ProductCard 
+                    url='custom-url'
+                    title='custom title'
+                    price={100}
+                    rating={{rate: 0.4, count: 283}}
+                />
+            </CartContext.Provider>
+        )
+        expect(addToCart).not.toHaveBeenCalled()
+        const button = screen.getByRole('button', {name: /add to cart/i})
+        const user = userEvent.setup()
+        await user.click(button)
+        expect(addToCart).toHaveBeenCalled()
     })
 })

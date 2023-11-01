@@ -5,9 +5,15 @@ import Collections from "./Collections/Collections";
 import AboutUs from "./AboutUs/AboutUs";
 import ContactUs from "./ContactUs/ContactUs";
 import OurStory from "./OurStory/OurStory";
-import AllProducts from "./AllProducts/AllProducts";
-import { useEffect, useState } from "react";
-import ProductPage from "./CollectionPage/CollectionPage";
+import { createContext, useEffect, useState } from "react";
+import CollectionPage from "./CollectionPage/CollectionPage";
+import Checkout from "./Checkout/Checkout";
+
+export const CartContext = createContext({
+  cartItems: [],
+  addToCart: () => {},
+  removeFromCart: () => {}
+})
 
 const Router = () => {
   const [mens, setMens] = useState([])
@@ -17,6 +23,35 @@ const Router = () => {
   const [collections, setCollections] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  const [cartItems, setCartItems] = useState([])
+
+  const addToCart = (url, alt, title, price, quantity = 1) => {
+    const newItem = {url, alt, title, price, quantity}
+    // Check if exists (idx !== -1)
+    const existingItemIndex = cartItems.findIndex(item => item.url === url)
+    if (existingItemIndex !== -1) {
+      const updatedCartItems = [...cartItems]
+      updatedCartItems[existingItemIndex].quantity += quantity
+      setCartItems(updatedCartItems)
+    } else {
+      setCartItems([...cartItems, newItem])
+    }
+  }
+
+  const removeFromCart = (url, alt, title, price, quantity = 1) => {
+    const newItem = {url, alt, title, price, quantity}
+    const existingItemIndex = cartItems.findIndex(item => item.url === url)
+    if (existingItemIndex === -1) return
+    const updatedCartItems = [...cartItems]
+    const updatedQuantity = updatedCartItems[existingItemIndex].quantity
+    if (updatedQuantity - quantity <= 0) {
+      updatedCartItems.splice(existingItemIndex, 1)
+    } else {
+      updatedCartItems[existingItemIndex].quantity -= quantity
+    }
+    setCartItems(updatedCartItems)
+  }
 
   const URL = 'https://fakestoreapi.com/products'
 
@@ -80,15 +115,15 @@ const Router = () => {
         },
         {
           path: "mens",
-          element: <ProductPage data={mens} title={'Our Mens Collection'} />
+          element: <CollectionPage data={mens} title={'Our Mens Collection'} />
         },
         {
           path: "womens",
-          element: <ProductPage data={womens} title={'Our Womens Collection'} />
+          element: <CollectionPage data={womens} title={'Our Womens Collection'} />
         },
         {
           path: "jewelry",
-          element: <ProductPage data={jewelry} title={'Our Jewelry Collection'} />
+          element: <CollectionPage data={jewelry} title={'Our Jewelry Collection'} />
         },
         {
           path: "about-us",
@@ -104,12 +139,20 @@ const Router = () => {
         },
         {
           path: "all-products",
-          element: <ProductPage data={allProducts} title={'All Products'} />
+          element: <CollectionPage data={allProducts} title={'All Products'} />
+        },
+        {
+          path: 'checkout',
+          element: <Checkout />
         }
       ]
     }
   ])
-  return <RouterProvider router={router} />
+  return (
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+      <RouterProvider router={router} />
+    </CartContext.Provider>
+  )
 }
 
 export default Router;

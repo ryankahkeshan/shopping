@@ -7,17 +7,16 @@ const CollectionPage = ({ data, title, testing = false }) => {
 
     useEffect(() => {
         if (!testing) {
-            const element = document.getElementById('collection-page-title')
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' })
-            }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
         }
-    })
+    }, [title])
 
     return (
         <>
-            <h1 id='collection-page-title' 
-                style={{padding:'3rem', paddingBottom:'1rem', fontSize:'2.5rem'}}>
+            <h1 style={{padding:'3rem', paddingBottom:'1rem', fontSize:'2.5rem'}}>
                 {title}
             </h1>
             <div style={{border:'1px solid rgb(0,0,0, 0.5)', margin:'0 3rem'}}></div>

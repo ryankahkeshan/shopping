@@ -2,8 +2,12 @@ import './ProductCard.css'
 import PropTypes, { number, string } from 'prop-types'
 import { Star } from 'lucide-react';
 import { v4 as uuid } from 'uuid';
+import { useContext } from 'react';
+import { CartContext } from '../Router';
 
 const ProductCard = ({ url, alt = '', title, price, rating  }) => {
+
+    const { addToCart } = useContext(CartContext)
 
     if (alt === '') alt = title
 
@@ -47,7 +51,9 @@ const ProductCard = ({ url, alt = '', title, price, rating  }) => {
                     <p>{`$${price}`}</p>
                 </div>
                 <div className="card-btns">
-                    <button className='card-colored-btn'>Add To Cart</button>
+                    <button className='card-colored-btn' onClick={() => addToCart(url, alt, title, price)}>
+                        Add To Cart
+                    </button>
                     <button>View Product</button>
                 </div>
             </div>
