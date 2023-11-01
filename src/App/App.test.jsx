@@ -9,7 +9,12 @@ describe("welcome section", () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <App/>
+        <App collections={[
+            {name: 'Mens', item: {image: 'url1'}, link: '/mens'},
+            {name: 'Womens', item: {image: 'url2'}, link:'/womens'},
+            {name: 'Jewelry', item: {image: 'url3'}, link: '/jewelry'}
+          ]}
+        />
       </BrowserRouter>
     )
   })
@@ -46,5 +51,36 @@ describe("welcome section", () => {
 
     await user.click(seeCol)
     expect(window.location.pathname).toBe('/collections')
+  })
+})
+
+describe('front page collections', () => {
+  it('renders the three collections', async () => {
+    render(
+      <BrowserRouter>
+        <App collections={[
+            {name: 'Mens', item: {image: 'url1'}, link: '/mens'},
+            {name: 'Womens', item: {image: 'url2'}, link:'/womens'},
+            {name: 'Jewelry', item: {image: 'url3'}, link: '/jewelry'}
+          ]}
+        />
+      </BrowserRouter>
+    )
+    const mens = screen.getByRole('heading', {name: 'Mens'})
+    expect(mens).toBeInTheDocument()
+    const mensImage = screen.getByAltText(/image for the mens's collection/i)
+    expect(mensImage).toBeInTheDocument()
+    expect(mensImage).toHaveAttribute('src', 'url1')
+
+    const womens = screen.getByRole('heading', {name: /womens/i})
+    expect(womens).toBeInTheDocument()
+
+    const jewelry = screen.getByRole('heading', {name: /jewelry/i})
+    expect(jewelry).toBeInTheDocument()
+    
+    const user = userEvent.setup()
+    await user.click(jewelry)
+
+    expect(window.location.pathname).toBe('/jewelry')
   })
 })

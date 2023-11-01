@@ -107,7 +107,7 @@ const Router = () => {
       children: [
         {
           index: true,
-          element: <App />
+          element: <App collections={collections} />
         },
         {
           path: "collections",

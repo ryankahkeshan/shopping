@@ -76,7 +76,7 @@ nav {
 
 @keyframes drop-down {
     from {
-        top: -10px;
+        top: 0px;
         scale: 0;
     }
     to {

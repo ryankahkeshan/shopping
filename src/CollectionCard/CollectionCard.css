@@ -37,12 +37,13 @@
 
 .collection-card h3 {
     font-size: 1.8rem;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    padding: 0.75rem 5rem;
+    width: 100%;
+    background-color: var(--main-bck-col);
+    color: var(--main-text-col);
+    transition: background-color 0.2s ease-in-out;
 }
 
 .collection-card:hover h3 {
-    background-color: var(--main-bck-col, black);
-    color: var(--main-text-col, white);
+    background-color: var(--main-bck-dark, black);
 }

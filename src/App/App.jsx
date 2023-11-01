@@ -12,6 +12,8 @@ import pic2 from './slides/two.jpg'
 import pic3 from './slides/three.png'
 import pic4 from './slides/four.jpg'
 import pic5 from './slides/five.jpg'
+import PropTypes, { any, objectOf } from 'prop-types'
+import CollectionCard from '../CollectionCard/CollectionCard'
 
 export const SLIDES = [
   {url: pic1, alt: 'Slide 1: 3 friends having fun'},
@@ -21,7 +23,7 @@ export const SLIDES = [
   {url: pic5, alt: 'Slide 5: 4 girls smiling while sitting down together'}
 ]
 
-const App = () => {
+const App = ({ collections }) => {
 
   return (
     <>
@@ -75,9 +77,28 @@ const App = () => {
           ]
         } />
       </div>
+      <div style={{display:'flex', flexDirection:'column', alignItems:'center', padding:'3rem', width:'100%', boxSizing:'border-box'}}>
+        <h2 style={{fontSize:'3rem'}}>Check Out Our Collections</h2>
+        <div style={{display:'flex', padding:'2rem', justifyContent:'space-between', width:'93%'}}>
+          {collections.map((el, idx) => {
+            return (
+              <CollectionCard
+                key={idx}
+                url={el.item.image}
+                name={el.name}
+                link={el.link}
+              />
+            )
+          })}
+        </div>
+      </div>
     </>
   )
-};
+}
+
+App.propTypes = {
+  collections: PropTypes.arrayOf(objectOf(any))
+}
 
 export default App
 
@@ -95,5 +116,11 @@ const WelcomeTitle = () => {
         </Link>
       </div>
     </section>
+  )
+}
+
+const FrontPageCollections = () => {
+  return (
+    <h1>Front Page</h1>
   )
 }
