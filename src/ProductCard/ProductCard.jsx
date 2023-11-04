@@ -53,7 +53,10 @@ const ProductCard = ({ id, url, alt = '', title, price, rating, link }) => {
                         <p>{`$${price}`}</p>
                     </div>
                     <div className="card-btns">
-                        <button className='card-colored-btn' onClick={() => addToCart(url, alt, title, price)}>
+                        <button className='card-colored-btn' onClick={(e) => {
+                            e.preventDefault()
+                            addToCart(url, alt, title, price)
+                        }}>
                             Add To Cart
                         </button>
                         <Link to={`${link}/${id}`} style={{width:'100%'}}>

@@ -160,4 +160,13 @@ describe('links to product page works', () => {
         await user.click(card)
         expect(window.location.pathname).toBe('/mens/2')
     })
+
+    it('clicking on add button doesnt bring to product page', async () => {
+        const addButton = screen.getByRole('button', {name: 'Add To Cart'})
+        const user = userEvent.setup()
+
+        expect(window.location.pathname).toBe('/')
+        await user.click(addButton)
+        expect(window.location.pathname).toBe('/')
+    })
 })
