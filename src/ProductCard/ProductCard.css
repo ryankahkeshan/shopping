@@ -44,7 +44,6 @@
     color: var(--main-bck-col);
     fill: var(--main-bck-col);
     transition: transform 0.1s ease-in-out;
-    cursor: pointer;
 }
 
 .empty-star {

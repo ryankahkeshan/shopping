@@ -8,6 +8,7 @@ import OurStory from "./OurStory/OurStory";
 import { createContext, useEffect, useState } from "react";
 import CollectionPage from "./CollectionPage/CollectionPage";
 import Checkout from "./Checkout/Checkout";
+import ProductPage from "./ProductPage/ProductPage";
 
 export const CartContext = createContext({
   cartItems: [],
@@ -40,7 +41,6 @@ const Router = () => {
   }
 
   const removeFromCart = (url, alt, title, price, quantity = 1) => {
-    const newItem = {url, alt, title, price, quantity}
     const existingItemIndex = cartItems.findIndex(item => item.url === url)
     if (existingItemIndex === -1) return
     const updatedCartItems = [...cartItems]
@@ -99,7 +99,7 @@ const Router = () => {
     }
     return collection[bestIdx]
   }
-
+  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -115,15 +115,27 @@ const Router = () => {
         },
         {
           path: "mens",
-          element: <CollectionPage data={mens} title={'Our Mens Collection'} />
+          element: <CollectionPage data={mens} title={'Our Mens Collection'} link={'/mens'} />
+        },
+        {
+          path: "mens/:id",
+          element: <ProductPage data={mens} />
         },
         {
           path: "womens",
-          element: <CollectionPage data={womens} title={'Our Womens Collection'} />
+          element: <CollectionPage data={womens} title={'Our Womens Collection'} link={'/womens'} />
+        },
+        {
+          path: "womens/:id",
+          element: <ProductPage data={womens} />
         },
         {
           path: "jewelry",
-          element: <CollectionPage data={jewelry} title={'Our Jewelry Collection'} />
+          element: <CollectionPage data={jewelry} title={'Our Jewelry Collection'} link={'/jewelry'} />
+        },
+        {
+          path: "jewelry/:id",
+          element: <ProductPage data={jewelry} />
         },
         {
           path: "about-us",

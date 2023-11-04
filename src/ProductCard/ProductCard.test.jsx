@@ -43,12 +43,17 @@ describe('product-card', () => {
     })
 
     it('4.5 stars', () => {
-        render(<ProductCard 
-            url='custom-url'
-            title='custom title'
-            price={100}
-            rating={{rate: 4.5, count: 283}}
-        />)
+        render(
+            <BrowserRouter>
+                <ProductCard 
+                    url='custom-url'
+                    title='custom title'
+                    price={100}
+                    rating={{rate: 4.5, count: 283}}
+                />
+            </BrowserRouter>
+        )
+        
         const title = screen.getByRole('heading', {name: 'custom title'})
         const stars = title.parentElement.parentElement.childNodes[0]
         expect(stars.childNodes.length).toEqual(5)
@@ -58,12 +63,16 @@ describe('product-card', () => {
     })
 
     it('4.4 stars', () => {
-        render(<ProductCard 
-            url='custom-url'
-            title='custom title'
-            price={100}
-            rating={{rate: 4.4, count: 283}}
-        />)
+        render(
+        <BrowserRouter>
+            <ProductCard 
+                url='custom-url'
+                title='custom title'
+                price={100}
+                rating={{rate: 4.4, count: 283}}
+            />
+        </BrowserRouter>
+        )
         const title = screen.getByRole('heading', {name: 'custom title'})
         const stars = title.parentElement.parentElement.childNodes[0]
         expect(stars.childNodes.length).toEqual(5)
@@ -74,12 +83,16 @@ describe('product-card', () => {
     })
 
     it('0.4 stars', () => {
-        render(<ProductCard 
-            url='custom-url'
-            title='custom title'
-            price={100}
-            rating={{rate: 0.4, count: 283}}
-        />)
+        render(
+            <BrowserRouter>
+                <ProductCard 
+                    url='custom-url'
+                    title='custom title'
+                    price={100}
+                    rating={{rate: 0.4, count: 283}}
+                />
+            </BrowserRouter>
+        )
         const title = screen.getByRole('heading', {name: 'custom title'})
         const stars = title.parentElement.parentElement.childNodes[0]
         expect(stars.childNodes.length).toEqual(5)
@@ -91,14 +104,16 @@ describe('product-card', () => {
     it('add to cart works', async () => {
         const addToCart = vi.fn()
         render(
-            <CartContext.Provider value={{ addToCart }}>
-                <ProductCard 
-                    url='custom-url'
-                    title='custom title'
-                    price={100}
-                    rating={{rate: 0.4, count: 283}}
-                />
-            </CartContext.Provider>
+            <BrowserRouter>
+                <CartContext.Provider value={{ addToCart }}>
+                    <ProductCard 
+                        url='custom-url'
+                        title='custom title'
+                        price={100}
+                        rating={{rate: 0.4, count: 283}}
+                    />
+                </CartContext.Provider>
+            </BrowserRouter>
         )
         expect(addToCart).not.toHaveBeenCalled()
         const button = screen.getByRole('button', {name: /add to cart/i})

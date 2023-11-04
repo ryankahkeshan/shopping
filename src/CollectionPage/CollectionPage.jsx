@@ -3,7 +3,7 @@ import PropTypes, { any, objectOf } from 'prop-types'
 import ProductCard from '../ProductCard/ProductCard'
 import { useEffect } from 'react';
 
-const CollectionPage = ({ data, title, testing = false }) => {
+const CollectionPage = ({ data, title, link, testing = false }) => {
 
     useEffect(() => {
         if (!testing) {
@@ -25,11 +25,13 @@ const CollectionPage = ({ data, title, testing = false }) => {
                     {data.map(el => {
                         return (
                             <ProductCard 
-                                key={el.id} 
+                                key={el.id}
+                                id={el.id} 
                                 url={el.image}
                                 title={el.title}
                                 price={el.price}
                                 rating={el.rating}
+                                link={link}
                             />
                         )
                     })}
@@ -42,6 +44,7 @@ const CollectionPage = ({ data, title, testing = false }) => {
 CollectionPage.propTypes = {
     data: PropTypes.arrayOf(objectOf(any)),
     title: PropTypes.string,
+    link: PropTypes.string,
     testing: PropTypes.bool
 }
 

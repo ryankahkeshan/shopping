@@ -4,8 +4,9 @@ import { Star } from 'lucide-react';
 import { v4 as uuid } from 'uuid';
 import { useContext } from 'react';
 import { CartContext } from '../Router';
+import { Link } from 'react-router-dom';
 
-const ProductCard = ({ url, alt = '', title, price, rating  }) => {
+const ProductCard = ({ id, url, alt = '', title, price, rating, link  }) => {
 
     const { addToCart } = useContext(CartContext)
 
@@ -43,7 +44,7 @@ const ProductCard = ({ url, alt = '', title, price, rating  }) => {
             </div>
             <div className="bottom">
                 <div style={{display:'flex', justifyContent:'center', gap:'8px', padding:'1rem'}}>
-                    {stars}
+                    <StarsComponent rating={rating.rate}/>
                 </div>
                 <div style={{display:'flex', justifyContent:'space-between', 
                     alignContent:'center', padding:'0 2rem', gap:'0.5rem'}}>
@@ -54,7 +55,9 @@ const ProductCard = ({ url, alt = '', title, price, rating  }) => {
                     <button className='card-colored-btn' onClick={() => addToCart(url, alt, title, price)}>
                         Add To Cart
                     </button>
-                    <button>View Product</button>
+                    <Link to={`${link}/${id}`} style={{width:'100%'}}>
+                        <button style={{width:'100%'}}>View Product</button>
+                    </Link>
                 </div>
             </div>
         </section>
@@ -62,11 +65,25 @@ const ProductCard = ({ url, alt = '', title, price, rating  }) => {
 }
 
 ProductCard.propTypes = {
+    id: PropTypes.number,
     url: PropTypes.string,
     alt: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
-    rating: PropTypes.objectOf(number)
+    rating: PropTypes.objectOf(number),
+    link: PropTypes.string
 }
 
 export default ProductCard
+
+export const StarsComponent = ({ rating }) => {
+    const stars = []
+    const roundedRating = Math.round(rating)
+    for (let i = 0; i < roundedRating; i++) {
+        stars.push(<Star key={uuid()} className='star'/>)
+    }
+    for(let i = roundedRating; i < 5; i++) {
+        stars.push(<Star key={uuid()} className='star empty-star'/>)
+    }
+    return stars
+}
