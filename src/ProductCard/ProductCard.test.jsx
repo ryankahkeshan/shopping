@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import ProductCard from './ProductCard';
 import { BrowserRouter } from 'react-router-dom';
 import { CartContext } from '../Router';
 
 describe('product-card', () => {
+
     it('renders properly', () => {
         render(
             <BrowserRouter>
@@ -120,5 +121,43 @@ describe('product-card', () => {
         const user = userEvent.setup()
         await user.click(button)
         expect(addToCart).toHaveBeenCalled()
+    })
+})
+
+describe('links to product page works', () => {
+
+    beforeEach(() => {
+        render(
+            <BrowserRouter>
+                <ProductCard 
+                    url='custom-url'
+                    title='custom title'
+                    price={100}
+                    rating={{rate: 0.4, count: 283}}
+                    link='mens'
+                    id='2'
+                />
+            </BrowserRouter>
+        )
+        window.history.replaceState({}, 'Test Page', '/')
+    })
+
+    it('view product works', async () => {
+        const viewButton = screen.getByRole('button', {name: 'View Product'})
+        const user = userEvent.setup()
+
+        expect(window.location.pathname).not.toBe('/mens/2')
+        await user.click(viewButton)
+        expect(window.location.pathname).toBe('/mens/2')
+    })
+
+    it('clicking on card works', async () => {
+        const img = screen.getByAltText('custom title')
+        const card = img.parentElement.parentElement
+        const user = userEvent.setup()
+
+        expect(window.location.pathname).not.toBe('/mens/2')
+        await user.click(card)
+        expect(window.location.pathname).toBe('/mens/2')
     })
 })

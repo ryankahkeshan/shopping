@@ -9,6 +9,7 @@
     border-radius: 0.8rem;
     box-shadow: 0 0 6px black;
     padding: 1rem;
+    cursor: pointer;
 }
 
 .top { 

@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { CartContext } from '../Router';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ id, url, alt = '', title, price, rating, link  }) => {
+const ProductCard = ({ id, url, alt = '', title, price, rating, link }) => {
 
     const { addToCart } = useContext(CartContext)
 
@@ -38,29 +38,31 @@ const ProductCard = ({ id, url, alt = '', title, price, rating, link  }) => {
     }
 
     return (
-        <section className='product-card'>
-            <div className="top">
-                <img src={url} alt={alt} />
-            </div>
-            <div className="bottom">
-                <div style={{display:'flex', justifyContent:'center', gap:'8px', padding:'1rem'}}>
-                    <StarsComponent rating={rating.rate}/>
+        <Link to={`${link}/${id}`} style={{textDecoration:'none', color:'inherit'}}>
+            <section className='product-card'>
+                <div className="top">
+                    <img src={url} alt={alt} />
                 </div>
-                <div style={{display:'flex', justifyContent:'space-between', 
-                    alignContent:'center', padding:'0 2rem', gap:'0.5rem'}}>
-                    <h1>{findSubstring(title)}</h1>
-                    <p>{`$${price}`}</p>
+                <div className="bottom">
+                    <div style={{display:'flex', justifyContent:'center', gap:'8px', padding:'1rem'}}>
+                        <StarsComponent rating={rating.rate}/>
+                    </div>
+                    <div style={{display:'flex', justifyContent:'space-between',
+                        alignContent:'center', padding:'0 2rem', gap:'0.5rem'}}>
+                        <h1>{findSubstring(title)}</h1>
+                        <p>{`$${price}`}</p>
+                    </div>
+                    <div className="card-btns">
+                        <button className='card-colored-btn' onClick={() => addToCart(url, alt, title, price)}>
+                            Add To Cart
+                        </button>
+                        <Link to={`${link}/${id}`} style={{width:'100%'}}>
+                            <button style={{width:'100%'}}>View Product</button>
+                        </Link>
+                    </div>
                 </div>
-                <div className="card-btns">
-                    <button className='card-colored-btn' onClick={() => addToCart(url, alt, title, price)}>
-                        Add To Cart
-                    </button>
-                    <Link to={`${link}/${id}`} style={{width:'100%'}}>
-                        <button style={{width:'100%'}}>View Product</button>
-                    </Link>
-                </div>
-            </div>
-        </section>
+            </section>
+        </Link>
     )
 }
 
