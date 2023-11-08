@@ -76,7 +76,6 @@
 .card-colored-btn {
     background-color: var(--main-bck-col, black);
     color: var(--main-text-col, white);
-    z-index: 3;
 }
 
 .card-btns button:hover {

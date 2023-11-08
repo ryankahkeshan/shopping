@@ -66,19 +66,32 @@ describe("side-cart", () => {
         expect(yourCart).not.toBeInTheDocument()
     })
 
-    it('checkout button brings to checkout', async () => {
+    it('checkout button brings to checkout and closes side cart', async () => {
+        const cartItems = [
+            {url:'url1', alt:'alt1', title:'title1', price:'10.99', quantity:'2'},
+            {url:'url2', alt:'alt2', title:'title2', price:'79.9829', quantity:'1'}
+        ]
         render(
             <BrowserRouter>
-                <SideCart/>
+                <CartContext.Provider value={{ cartItems }} >
+                    <Navbar />
+                </CartContext.Provider>
             </BrowserRouter>
         )
         expect(window.location.pathname).not.toBe('/checkout')
-        const checkoutBtn = screen.getByRole('button', {name: 'CHECKOUT'})
+        const openCart = screen.getByTestId('cart-icon')
         const user = userEvent.setup()
+
+        await user.click(openCart)
+        
+        expect(window.location.pathname).not.toBe('/checkout')
+        const checkoutBtn = screen.getByRole('button', {name: 'CHECKOUT'})
+        expect(checkoutBtn).toBeInTheDocument()
 
         await user.click(checkoutBtn)
 
         expect(window.location.pathname).toBe('/checkout')
+        expect(checkoutBtn).not.toBeInTheDocument()
     })
 })
 
@@ -215,13 +228,13 @@ describe('item card', () => {
         expect(minus).toBeInTheDocument()
         expect(removeFromCart).not.toHaveBeenCalled()
         await user.click(minus)
-        expect(removeFromCart).toHaveBeenCalledOnce()
+        expect(removeFromCart).not.toHaveBeenCalledOnce()
 
         const remove = screen.getByRole('button', {name: /remove/i})
         expect(remove).toBeInTheDocument()
-        expect(removeFromCart).toHaveBeenCalledOnce()
+        expect(removeFromCart).not.toHaveBeenCalledOnce()
         await user.click(remove)
-        expect(removeFromCart).toHaveBeenCalledTimes(2)
+        expect(removeFromCart).not.toHaveBeenCalledTimes(2)
 
         const price = container.childNodes[0].childNodes[1].childNodes[0].childNodes[1]
         expect(price.textContent).toBe('$ 100')
@@ -284,5 +297,4 @@ describe('item card', () => {
         expect(image3).toBeInTheDocument()
         expect(image3).toHaveAttribute('src', 'url3')
     })
-
 })

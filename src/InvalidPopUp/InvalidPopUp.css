@@ -1,0 +1,51 @@
+.invalid-popup {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    background-color: white;
+    width: 350px;
+    border-radius: 0.25rem;
+    padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 0 6px black;
+    z-index: 100;
+    animation: invalid-entry 0.2s 1;
+}
+
+.pop-up-x {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+    transition: scale 0.05s ease-in-out, stroke-width 0.05s ease-in-out;
+}
+
+.pop-up-x:hover {
+    scale: 1.1;
+    stroke-width: 3;
+}
+
+.red-line {
+    height: 5px;
+    width: 90%;
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top-right-radius: 3rem;
+}
+
+@keyframes invalid-entry {
+    from {
+        transform: translateX(100%) scale(1.2);
+    }
+    50% {
+        transform: translateX(-5%);
+    }
+    to {
+        transform: translateX(0) scale(1);
+    }
+}

@@ -59,9 +59,7 @@ const ProductCard = ({ id, url, alt = '', title, price, rating, link }) => {
                         }}>
                             Add To Cart
                         </button>
-                        <Link to={`${link}/${id}`} style={{width:'100%'}}>
-                            <button style={{width:'100%'}}>View Product</button>
-                        </Link>
+                        <button style={{width:'100%'}}>View Product</button>
                     </div>
                 </div>
             </section>

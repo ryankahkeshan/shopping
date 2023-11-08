@@ -50,7 +50,7 @@
     margin: 1rem 0;
 }
 
-.side-cart-checkout-btn {
+.side-cart-checkout-btn, .side-cart-checkout-btn-invalid {
     outline: none;
     border: none;
     padding: 0.65rem 1rem;
@@ -60,6 +60,11 @@
     transition: background-color 0.2s ease-in-out font-weight 0.2s ease-in-out;
     font-size: 0.9rem;
     width: 100%;
+}
+
+.side-cart-checkout-btn-invalid {
+    background-color: var(--main-bck-invalid);
+    cursor: not-allowed;
 }
 
 .side-cart-checkout-btn:hover {

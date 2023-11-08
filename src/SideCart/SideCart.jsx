@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { XCircle } from 'lucide-react'
 import Icon from '@mdi/react';
 import { mdiCartOutline } from '@mdi/js';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useContext, useMemo } from 'react';
 import { CartContext } from '../Router';
 
@@ -59,7 +59,15 @@ const SideCart = ({ closeCart }) => {
                 </div>
                 <div className="side-cart-divider"></div>
                 <Link to='/checkout'>
-                    <button className='side-cart-checkout-btn'>CHECKOUT</button>
+                    <button className={cartItems.length > 0 ? 'side-cart-checkout-btn' :
+                        'side-cart-checkout-btn-invalid'}
+                        onClick={(e) => {
+                            cartItems.length > 0 ? closeCart(false) :
+                            e.preventDefault()
+                        }}
+                    >
+                        CHECKOUT
+                    </button>
                 </Link>
             </div>
             
@@ -73,8 +81,11 @@ SideCart.propTypes = {
 
 export default SideCart
 
-const CartItem = ({ url, alt, title, price, quantity }) => {
-    const { addToCart, removeFromCart } = useContext(CartContext)
+export const CartItem = ({ url, alt, title, price, quantity, setInvalid = undefined, msg = undefined }) => {
+    
+    const { addToCart, removeFromCart, cartItems } = useContext(CartContext)
+    const { pathname } = useLocation()
+
     return (
         <section className='item'>
             <div style={{height:'100%', width:'100%', overflow:'hidden'}}>
@@ -87,16 +98,34 @@ const CartItem = ({ url, alt, title, price, quantity }) => {
                 </div>
                 <div style={{display:'flex', gap:'0.75rem', alignItems:'center'}}>
                     <button className='side-cart-quanity-btn' 
-                        onClick={() => addToCart(url, alt, title, price)}>
+                        onClick={() => {
+                            console.log('a')
+                          if (pathname === '/checkout' && setInvalid !== undefined) setInvalid(false)
+                          addToCart(url, alt, title, price)
+                        }}>
                         +
                     </button>
                     <p style={{width:'1ch'}}>{quantity}</p>
                     <button className='side-cart-quanity-btn'
-                        onClick={() => removeFromCart(url, alt, title, price)}>
+                        onClick={() => {
+                            if (pathname === '/checkout' && cartItems.length === 1 && cartItems[0].quantity === 1) {
+                                if(setInvalid !== undefined) setInvalid(true)
+                                if (msg !== undefined) msg('Must have at least one item at checkout')
+                            } else {
+                                removeFromCart(url, alt, title, price)
+                            }
+                        }}>
                         -
                     </button>
                     <button className='side-cart-remove-btn'
-                        onClick={() => removeFromCart(url, alt, title, price, Infinity)}>
+                        onClick={() => {
+                            if (pathname === '/checkout' && cartItems.length === 1) {
+                                if(setInvalid !== undefined) setInvalid(true)
+                                if (msg !== undefined) msg('Must have at least one item at checkout')
+                            } else {
+                            removeFromCart(url, alt, title, price, Infinity)
+                            }
+                        }}>
                         Remove
                     </button>
                 </div>
@@ -110,5 +139,7 @@ CartItem.propTypes = {
     alt: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
-    quantity: PropTypes.number
+    quantity: PropTypes.number,
+    setInvalid: PropTypes.func,
+    msg: PropTypes.func
 }
