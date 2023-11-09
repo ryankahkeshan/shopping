@@ -23,7 +23,6 @@ describe('product-card', () => {
         expect(image).toHaveAttribute('src', 'custom-url')
 
         const stars = image.parentElement.parentElement.childNodes[1].childNodes[0]
-        console.log(stars.childNodes)
         expect(stars.childNodes.length).toEqual(5)
         for (let i = 0; i < 4; i++) {
             expect(stars.childNodes[i]).not.toHaveClass('empty-star')

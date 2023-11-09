@@ -1,0 +1,13 @@
+.our-story-description {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 3rem;
+    align-items: center;
+}
+
+.our-story-description p {
+    max-width: 90ch;
+    font-size: 1.2rem;
+    line-height: 24px;
+}

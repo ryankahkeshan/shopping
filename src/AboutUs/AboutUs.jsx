@@ -1,14 +1,11 @@
 import './AboutUs.css'
 import pic1 from './../App/slides/one.png'
+import ExtraHeader from '../ExtraHeader/ExtraHeader'
 
 const AboutUs = () => {
     return (
         <section style={{display:'flex', flexDirection:'column', alignItems:'center', width:'100%'}}>
-            <div className='about-us-header'>
-                <h1 className='about-us-title'>About Us</h1>
-                <img style={{height:'100%', width:'75%', objectFit:'contain'}} src={pic1}
-                 alt="Picture of MySHOP employees smiling" />
-            </div>
+            <ExtraHeader url={pic1} title={'About Us'} />
             <div className="about-us-description">
                 <p>
                     Welcome to My<em>SHOP</em>, where fashion meets comfort and style blends seamlessly with

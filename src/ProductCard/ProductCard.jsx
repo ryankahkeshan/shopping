@@ -68,7 +68,7 @@ const ProductCard = ({ id, url, alt = '', title, price, rating, link }) => {
 }
 
 ProductCard.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     url: PropTypes.string,
     alt: PropTypes.string,
     title: PropTypes.string,

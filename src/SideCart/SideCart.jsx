@@ -99,7 +99,6 @@ export const CartItem = ({ url, alt, title, price, quantity, setInvalid = undefi
                 <div style={{display:'flex', gap:'0.75rem', alignItems:'center'}}>
                     <button className='side-cart-quanity-btn' 
                         onClick={() => {
-                            console.log('a')
                           if (pathname === '/checkout' && setInvalid !== undefined) setInvalid(false)
                           addToCart(url, alt, title, price)
                         }}>
@@ -138,8 +137,8 @@ CartItem.propTypes = {
     url: PropTypes.string,
     alt: PropTypes.string,
     title: PropTypes.string,
-    price: PropTypes.number,
-    quantity: PropTypes.number,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     setInvalid: PropTypes.func,
     msg: PropTypes.func
 }

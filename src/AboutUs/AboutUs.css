@@ -1,20 +1,3 @@
-.about-us-header {
-    display: flex;
-    width: 100%;
-    background-color: var(--main-bck-light, black);
-    align-items: center;
-}
-
-.about-us-title {
-    flex: 1;
-    color: var(--main-text-col, white);
-    transform: rotate(-90deg);
-    text-shadow: 0 0 6px #000;
-    text-align: center;
-    font-size: 5rem;
-    white-space: nowrap;
-}
-
 .about-us-description {
     width: 100%;
     display: grid;

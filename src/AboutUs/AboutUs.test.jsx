@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { userEvent } from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import AboutUs from './AboutUs';
 
@@ -14,13 +13,8 @@ describe('about-us', () => {
     })
 
     it('renders properly', () => {
-        const title = screen.getByRole('heading', {name:'About Us'})
-        expect(title).toBeInTheDocument()
-
-        const img = screen.getByAltText('Picture of MySHOP employees smiling')
-        expect(img).toBeInTheDocument()
-        expect(img).toHaveAttribute('src', '/src/App/slides/one.png')
-
+        // Header tested seperately
+        const title = screen.getByRole('heading', {name: 'About Us'})
         const paragraphs = title.parentElement.parentElement.childNodes[1]
         expect(paragraphs.childNodes.length).toBe(4)
         const p1 = paragraphs.childNodes[0]
