@@ -3,6 +3,7 @@
 :root {
     --main-bck-col: rgb(114, 70, 70);
     --main-bck-dark: rgb(88, 54, 54);
+    --main-bck-light: rgb(131, 91, 91);
     --main-bck-invalid: rgba(114, 70, 70, 0.807);
     --main-text-col: white;
     --complete-col: rgba(52, 161, 52, 0.905);
