@@ -1,0 +1,87 @@
+.contact-us-page {
+    background-color: var(--main-bck-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    color: white;
+}
+
+.contact-us-icon {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.left-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.left-contacts input, .contact-us-msg {
+    padding: 0.5rem 1rem;
+    width: 300px;
+    box-shadow: 0 0 10px rgb(41, 40, 40);
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+}
+
+.contact-us-button {
+    outline: none;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.contact-us-button:hover {
+    background-color: rgb(218, 216, 216);
+}
+
+.contact-us-pop-up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-us-pop-up-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 2rem;
+    box-shadow: 0 0 10px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    color: black;
+    padding: 2rem;
+}
+
+.contact-us-form-button {
+    outline: none;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out;
+}
