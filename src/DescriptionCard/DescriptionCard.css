@@ -55,6 +55,7 @@
     cursor: pointer;
     transition: transform 0.1s ease-in-out;
     color: var(--main-bck-col);
+    background-color: rgb(240, 239, 239);
     font-weight: 500;
 }
 

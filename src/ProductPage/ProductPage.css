@@ -55,6 +55,7 @@
     outline: none;
     border: none;
     cursor: pointer;
+    background-color: rgba(236, 234, 234, 0.897);
     transition: background-color 0.1s ease-in-out;
 }
 .product-page-quantity-selector button:hover {

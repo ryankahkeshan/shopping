@@ -59,7 +59,7 @@ const ProductCard = ({ id, url, alt = '', title, price, rating, link }) => {
                         }}>
                             Add To Cart
                         </button>
-                        <button style={{width:'100%'}}>View Product</button>
+                        <button style={{width:'100%', backgroundColor:'rgb(240, 239, 239)'}}>View Product</button>
                     </div>
                 </div>
             </section>
