@@ -8,7 +8,7 @@ const ExtraHeader = ({ url, title }) => {
             top: 100,
             behavior: 'smooth'
         })
-    })
+    }, [])
 
     return (
         <section className='extra-header'>

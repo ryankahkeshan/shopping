@@ -1,5 +1,5 @@
 import './CollectionCard.css'
-import PropTypes, { string } from 'prop-types'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const CollectionCard = ({ url, name, link }) => {
@@ -17,9 +17,9 @@ const CollectionCard = ({ url, name, link }) => {
 }
 
 CollectionCard.propTypes = {
-    url: string,
-    name: string,
-    link: string
+    url: PropTypes.string,
+    name: PropTypes.string,
+    link: PropTypes.string
 }
 
 export default CollectionCard

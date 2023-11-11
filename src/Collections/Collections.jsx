@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import "./Collections.css"
-import PropTypes, { any, arrayOf, objectOf, string } from 'prop-types'
+import PropTypes, { any, arrayOf, objectOf } from 'prop-types'
 import CollectionCard from "../CollectionCard/CollectionCard"
 import { v4 } from "uuid"
 

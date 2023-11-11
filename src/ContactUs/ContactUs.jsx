@@ -1,6 +1,6 @@
 import './ContactUs.css'
 import { Mail, Phone } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InvalidPopUp from '../InvalidPopUp/InvalidPopUp';
 
 const ContactUs = () => {
@@ -26,6 +26,13 @@ const ContactUs = () => {
     const cleanUp = () => {
         setForm({first:'', last:'', email:'', msg:''})
     }
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 100,
+            behavior: 'smooth'
+        })
+    }, [])
 
     return (
         <section className='contact-us-page'>
